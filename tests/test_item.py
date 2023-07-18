@@ -27,3 +27,11 @@ def test_instantiate_from_csv():
     Item.all = []
     Item.instantiate_from_csv()
     assert len(Item.all) == 5
+
+def test_str():
+    item = Item('Телевизор', 10000, 5)
+    assert str(item) == 'Телевизор'
+
+def test_repr():
+    item = Item('Телевизор', 10000, 5)
+    assert repr(item) == "Item('Телевизор', 10000, 5)"

@@ -52,3 +52,9 @@ class Item:
             for item in list(data):
                 obj = Item(item['name'], Item.string_to_number(item['price']), Item.string_to_number(item['quantity']))
                 Item.all.append(obj)
+
+    def __str__(self):
+        return self.name
+
+    def __repr__(self):
+        return f"Item('{self.name}', {self.price}, {self.quantity})"
