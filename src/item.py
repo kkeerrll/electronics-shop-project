@@ -1,3 +1,4 @@
+import csv
 class Item:
     """
     Класс для представления товара в магазине.
@@ -16,7 +17,6 @@ class Item:
         self.__name = name
         self.price = price
         self.quantity = quantity
-        self.all.append(self)
 
     def calculate_total_price(self) -> float:
         """
@@ -31,3 +31,24 @@ class Item:
         Применяет установленную скидку для конкретного товара.
         """
         self.price *= self.pay_rate
+
+    @property
+    def name(self):
+        """Возвращает полное имя сотрудника. К атрибуту можно обращаться без ()."""
+        return self.__name
+    @name.setter
+    def name(self, name):
+        self.__name = name[0:10]
+
+    @staticmethod
+    def string_to_number(str1: str) -> int:
+        return int(float(str1))
+
+    @staticmethod
+    def instantiate_from_csv():
+        with open("/Users/anzelikagudkova/Desktop/electronics-shop-project/src/items.csv", 'r', newline='',
+                  encoding='CP1251') as file:
+            data = csv.DictReader(file)
+            for item in list(data):
+                obj = Item(item['name'], Item.string_to_number(item['price']), Item.string_to_number(item['quantity']))
+                Item.all.append(obj)
