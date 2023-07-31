@@ -1,5 +1,9 @@
+import pytest
+
 from src.item import Item
 from src.phone import Phone
+
+
 
 test_item1 = Item("Утюг", 2000, 15)
 test_item2 = Item("TV", 40000, 5)
@@ -39,3 +43,9 @@ def test_add():
     item = Item('Телевизор', 10000, 5)
     phone = Phone('iPhone 14', 120000, 5, 2)
     assert item + phone == 10
+
+def test_instantiate_from_csv_error():
+    with pytest.raises(Exception, match='item.csv'):
+        Item.instantiate_from_csv()
+
+

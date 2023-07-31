@@ -44,6 +44,7 @@ class Item:
     def string_to_number(str1: str) -> int:
         return int(float(str1))
 
+
     @staticmethod
     def instantiate_from_csv():
         with open("/Users/anzelikagudkova/Desktop/electronics-shop-project/src/items.csv", 'r', newline='',
@@ -62,3 +63,32 @@ class Item:
     def __add__(self, other):
         return self.quantity + other.quantity
 
+    # @staticmethod
+    # def instantiate_from_csv():
+    #     """Класс-метод, инициализирующий экземпляры класса Item данными из файла src/items.csv"""
+    #     try:
+    #         with open("/Users/anzelikagudkova/Desktop/electronics1/src/items.csv", 'r', newline='',
+    #                   encoding='CP1251') as file:
+    #             data = csv.DictReader(file)
+    #             for item in data:
+    #                 item['name'], float(item['price']), Item.string_to_number(item['quantity'])
+    #
+    #     except Exception:
+    #         print('\033[91m' + 'InstantiateCSVError: Файл item.csv поврежден' + '\033[0m')
+    #         # raise Exception('InstantiateCSVError: Файл item.csv поврежден')
+    #     except FileNotFoundError:
+    #         print('\033[91m' + 'FileNotFoundError: Отсутствует файл item.csv' + '\033[0m')
+    #         # raise ZeroDivisionError('Cannot divide by zero')
+
+
+    @staticmethod
+    def instantiate_from_csv():
+        """Класс-метод, инициализирующий экземпляры класса Item данными из файла src/items.csv"""
+        with open("/Users/anzelikagudkova/Desktop/electronics1/src/items.csv", 'r', newline='',
+                  encoding='CP1251') as file:
+            data = csv.DictReader(file)
+            for item in data:
+                item['name'], float(item['price']), Item.string_to_number(item['quantity'])
+
+
+        raise Exception('InstantiateCSVError: Файл item.csv поврежден')
