@@ -81,14 +81,33 @@ class Item:
     #         # raise ZeroDivisionError('Cannot divide by zero')
 
 
+    # @staticmethod
+    # def instantiate_from_csv():
+    #     """Класс-метод, инициализирующий экземпляры класса Item данными из файла src/items.csv"""
+    #     with open("/Users/anzelikagudkova/Desktop/electronics1/src/items.csv", 'r', newline='',
+    #               encoding='CP1251') as file:
+    #         data = csv.DictReader(file)
+    #         for item in data:
+    #             item['name'], float(item['price']), Item.string_to_number(item['quantity'])
+    #
+    #
+    #     raise Exception('InstantiateCSVError: Файл item.csv поврежден')
+    #     raise FileNotFoundError('FileNotFoundError: Отсутствует файл item.csv')
     @staticmethod
     def instantiate_from_csv():
-        """Класс-метод, инициализирующий экземпляры класса Item данными из файла src/items.csv"""
-        with open("/Users/anzelikagudkova/Desktop/electronics1/src/items.csv", 'r', newline='',
-                  encoding='CP1251') as file:
-            data = csv.DictReader(file)
-            for item in data:
-                item['name'], float(item['price']), Item.string_to_number(item['quantity'])
-
-
-        raise Exception('InstantiateCSVError: Файл item.csv поврежден')
+        try:
+            with open("/Users/anzelikagudkova/Desktop/electronics1/src/items.csv", 'r', newline='',
+                      encoding='CP1251') as file:
+                data = csv.DictReader(file)
+                items = []
+                for item in data:
+                    name = item['name']
+                    price = float(item['price'])
+                    quantity = Item.string_to_number(item['quantity'])
+                    item_instance = Item(name, price, quantity)
+                    items.append(item_instance)
+                return items
+        except FileNotFoundError:
+            raise FileNotFoundError('Отсутствует файл item.csv')
+        except (IOError, ValueError):
+            raise Exception('Файл item.csv поврежден')

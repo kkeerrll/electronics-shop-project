@@ -44,8 +44,14 @@ def test_add():
     phone = Phone('iPhone 14', 120000, 5, 2)
     assert item + phone == 10
 
-def test_instantiate_from_csv_error():
-    with pytest.raises(Exception, match='item.csv'):
-        Item.instantiate_from_csv()
+def test_instantiate_from_csv_file_not_found():
+    # Предполагаем, что файл items.csv не существует
+    with pytest.raises(FileNotFoundError):
+        instantiate_from_csv()
 
+
+def test_instantiate_from_csv_file_corrupted():
+    # Предполагаем, что файл items.csv существует, но поврежден
+    with pytest.raises(InstantiateCSVError):
+        instantiate_from_csv()
 
