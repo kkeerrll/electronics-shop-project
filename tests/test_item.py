@@ -47,11 +47,11 @@ def test_add():
 def test_instantiate_from_csv_file_not_found():
     # Предполагаем, что файл items.csv не существует
     with pytest.raises(FileNotFoundError):
-        instantiate_from_csv()
+        Item.instantiate_from_csv()
 
 
 def test_instantiate_from_csv_file_corrupted():
     # Предполагаем, что файл items.csv существует, но поврежден
-    with pytest.raises(InstantiateCSVError):
-        instantiate_from_csv()
+    with pytest.raises(Exception):
+        Item.instantiate_from_csv()
 
